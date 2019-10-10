@@ -20,7 +20,6 @@ export const questions =[
       },
       "favourite":false,
       "tips":[
-
       ]
    },
    {
