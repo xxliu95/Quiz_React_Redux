@@ -3,7 +3,7 @@ import GlobalState from './reducers';
 import { createStore } from 'redux';
 //import { questions } from "../asserts/mock-data";
 import React from 'react';
-import App from '../App';
+import App from '../components/App';
 
 export default class ReduxProvider extends React.Component {
     constructor(props) {
