@@ -1,4 +1,4 @@
-import React, {Fragment} from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import {changeQuestion, initQuestions, questionAnswer, submit} from "../redux/actions";
 import Game from './Game';
@@ -6,15 +6,23 @@ import '../App.css';
 import 'typeface-roboto';
 import Header from './Header';
 import Footer from "./Footer";
-import {LinearProgress} from "@material-ui/core/es/index";
-
+import {
+    Button, Card, CardContent, Grid,
+    LinearProgress,
+    Paper
+} from "@material-ui/core/es/index";
 
 let url = "https://quiz.dit.upm.es/api/quizzes/random10wa?token=8606ca3284a0e9615d99";
 let noimage = "http://denrakaev.com/wp-content/uploads/2015/03/no-image-800x511.png";
 
+
 class App extends React.Component {
 
     componentDidMount() {
+        this.initReset();
+    }
+
+    initReset() {
         fetch(url)
             .then( res => res.json())
             .then( data => {
@@ -33,19 +41,33 @@ class App extends React.Component {
                         <p>
                             Loading...
                         </p>
-                        <LinearProgress />
+                        <LinearProgress/>
                     </div>
                     <Footer/>
-                </div> //aquí meter un spinner mientras carga
+                </div>
             );
         }
 
         if(this.props.finished) {
+            let msg = "Try again next time!";
+            if( this.props.score > 4 && this.props.score < 7 )
+                msg = "Good job!"
+            else if ( this.props.score >= 7 )
+                msg = "Excelent!"
             return (
                 <div className="App">
                     <Header/>
-                    Your Score: {this.props.score}
-                    <Footer/>
+                    <Grid style={{padding: 70, paddingLeft:250, paddingRight:250}}>
+                        <Card>
+                            <CardContent>
+                                <h2>Your Score: {this.props.score}</h2>
+                                <h3>{msg}</h3>
+                                <Button onClick={() => this.initReset()}>
+                                    PLAY AGAIN
+                                </Button>
+                            </CardContent>
+                        </Card>
+                    </Grid>
                 </div>
             );
         } else {
@@ -55,7 +77,7 @@ class App extends React.Component {
                     <Game num={this.props.currentQuestion}
                           question={this.props.questions[this.props.currentQuestion]}
                           image={this.props.questions[this.props.currentQuestion].attachment === null ?
-                                noimage : this.props.questions[this.props.currentQuestion].attachment.url}
+                              noimage : this.props.questions[this.props.currentQuestion].attachment.url}
                           tips={this.props.questions[this.props.currentQuestion].tips}
                           author={this.props.questions[this.props.currentQuestion].author}
 
@@ -68,12 +90,14 @@ class App extends React.Component {
                               this.props.dispatch(changeQuestion(this.props.currentQuestion, inc))
                           }}
                           onSubmit={() => {
-                              this.props.dispatch(submit(this.props.questions))
+                              this.props.dispatch(submit(this.props.questions));
                           }}>
                     </Game>
+
                 </div>
             );
         }
+
     }
 }
 
@@ -82,7 +106,6 @@ function mapStateToProps(state) {
         ...state
     };
 }
-
 
 
 export default connect(mapStateToProps)(App);
