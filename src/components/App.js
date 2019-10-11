@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import {changeQuestion, initQuestions, questionAnswer, submit} from "../redux/actions";
 import Game from './Game';
+import Bar from './Bar';
 import '../App.css';
 import 'typeface-roboto';
 import Header from './Header';
@@ -9,7 +10,6 @@ import Footer from "./Footer";
 import {
     Button, Card, CardContent, Grid,
     LinearProgress,
-    Paper
 } from "@material-ui/core/es/index";
 
 let url = "https://quiz.dit.upm.es/api/quizzes/random10wa?token=8606ca3284a0e9615d99";
@@ -93,7 +93,10 @@ class App extends React.Component {
                               this.props.dispatch(submit(this.props.questions));
                           }}>
                     </Game>
-
+                    <Bar current={this.props.currentQuestion}
+                         onChangeQuestion={(inc) => {
+                            this.props.dispatch(changeQuestion(this.props.currentQuestion, inc))
+                    }}/>
                 </div>
             );
         }
