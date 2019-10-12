@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import {changeQuestion, initQuestions, questionAnswer, submit} from "../redux/actions";
 import Game from './Game';
 import Bar from './Bar';
-import '../App.css';
+import '../css/App.css';
 import 'typeface-roboto';
 import Header from './Header';
 import Footer from "./Footer";
@@ -81,8 +81,6 @@ class App extends React.Component {
                           tips={this.props.questions[this.props.currentQuestion].tips}
                           author={this.props.questions[this.props.currentQuestion].author}
 
-                          disableNext={this.props.currentQuestion === this.props.questions.length - 1}
-                          disablePrev={this.props.currentQuestion === 0}
                           onQuestionAnswer={(answer) => {
                               this.props.dispatch(questionAnswer(this.props.currentQuestion, answer))
                           }}
@@ -95,12 +93,11 @@ class App extends React.Component {
                     </Game>
                     <Bar current={this.props.currentQuestion}
                          onChangeQuestion={(inc) => {
-                            this.props.dispatch(changeQuestion(this.props.currentQuestion, inc))
-                    }}/>
+                             this.props.dispatch(changeQuestion(this.props.currentQuestion, inc))
+                         }}/>
                 </div>
             );
         }
-
     }
 }
 
@@ -109,6 +106,5 @@ function mapStateToProps(state) {
         ...state
     };
 }
-
 
 export default connect(mapStateToProps)(App);

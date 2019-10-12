@@ -1,11 +1,11 @@
 import React, {Fragment} from 'react';
 import Tip from './Tip';
+import Timer from './Timer'
 import {
     Button, ButtonGroup,
     Card,
-    CardActions,
     CardContent,
-    CardMedia, Grid, Paper, TextField,
+    CardMedia, Grid, TextField,
     Typography
 } from "@material-ui/core/es/index";
 
@@ -13,11 +13,11 @@ export default class Game extends React.Component {
     render() {
         return (
             <div>
-                <Grid container style={{paddingLeft:20,paddingRight:20, paddingTop:10}}>
+                <Grid container style={{paddingLeft:20,paddingRight:20, paddingTop:30}}>
                     <Grid item sm style={{ padding:20}}>
                         <Card>
                             <CardMedia
-                                style={{height: 350}}
+                                style={{height: 300}}
                                 image={this.props.image}
                                 title="Contemplative Reptile"
                             />
@@ -35,14 +35,15 @@ export default class Game extends React.Component {
                                             )}
                                 </Typography>
                                 <div style={{ textAlign: "left", fontSize: "small"}}>
-                                    <img src={this.props.author.photo.url} style={{height:30, paddingRight:10}} alt="img"/>
+                                    <img src={this.props.author.photo.url === null ? {} : this.props.author.photo.url}
+                                         style={{height:30, paddingRight:10}} alt="img"/>
                                         Created by {this.props.author.username}.
                                 </div>
                             </CardContent>
                         </Card>
                     </Grid>
-                    <Grid item sm style={{paddingTop:150}}>
-                        <Typography style={{height: 120}} gutterBottom variant="h4" component="h4">
+                    <Grid item sm>
+                        <Typography style={{height: 120, paddingTop:100}} gutterBottom variant="h4" component="h4">
                             {this.props.question.question}
                         </Typography>
                         <TextField
@@ -52,28 +53,16 @@ export default class Game extends React.Component {
                             onChange={(e) => this.props.onQuestionAnswer(e.target.value)}
                             margin="normal"
                         />
-
-                        <ButtonGroup variant="contained" size="small" aria-label="small contained button group"
-                                     style={{textAlign: "center"}}>
-                            <Button onClick={() => this.props.onChangeQuestion(-1)}
-                                    disabled={this.props.disablePrev}>
-                                Anterior
-                            </Button>
-                            <Button onClick={() => this.props.onChangeQuestion(1)}
-                                    disabled={this.props.disableNext}>
-                                Siguiente
-                            </Button>
-                            <Button onClick={() => this.props.onSubmit()}>
-                                Submit
-                            </Button>
-                        </ButtonGroup>
-
-
+                        <Button
+                            style={{ color:"white", backgroundColor: "#abb1cf", marginBottom: 50 }}
+                            onClick={() => this.props.onSubmit()}>
+                            Finish the test
+                        </Button>
+                        <Timer onTimeout={() => this.props.onSubmit()}/>
 
                     </Grid>
                 </Grid>
             </div>
-
         );
     }
 }
