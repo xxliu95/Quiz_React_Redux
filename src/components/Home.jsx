@@ -14,8 +14,8 @@ export default class Home extends React.Component {
                         <Typography variant="h1" component="h2">
                             QUIZ GAME
                         </Typography>
-                        <div style={{padding: 20}}>
-                            <Link to="/play" style={{ textDecoration: 'none' }}>
+                        <div style={{padding: 50}}>
+                            <Link to="/play" style={{ textDecoration: 'none'}}>
                                 <Button style={{backgroundColor: "#abb1cf"}}>
                                     <Typography style={{padding:5, color: "white"}} variant="h5" component="h5">
                                         PLAY NOW

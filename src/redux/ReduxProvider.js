@@ -5,7 +5,7 @@ import { createStore } from 'redux';
 import React from 'react';
 import App from '../components/App';
 import Home from "../components/Home";
-import {BrowserRouter as Router, Link, Route} from "react-router-dom";
+import {HashRouter as Router, Link, Route} from "react-router-dom";
 
 
 export default class ReduxProvider extends React.Component {
