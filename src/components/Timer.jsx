@@ -11,7 +11,7 @@ export default class Timer extends React.Component {
     render() {
         const {count} = this.state;
         return(
-            <h5>Time left: {Math.floor(count/60)}min {count%60}s</h5>
+            <h5>Time left: {Math.floor(count/60)} min {count%60} s</h5>
         )
     }
 

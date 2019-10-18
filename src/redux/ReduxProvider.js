@@ -4,6 +4,9 @@ import { createStore } from 'redux';
 //import { questions } from "../asserts/mock-data";
 import React from 'react';
 import App from '../components/App';
+import Home from "../components/Home";
+import {BrowserRouter as Router, Link, Route} from "react-router-dom";
+
 
 export default class ReduxProvider extends React.Component {
     constructor(props) {
@@ -22,9 +25,13 @@ export default class ReduxProvider extends React.Component {
         return (
             <Provider store={ this.store }>
                 <div style={{ height: '100%' }}>
-                    <App store={ this.store }/>
+                    <Router>
+                        <Route path="/" exact component={Home}/>
+                        <Route path="/play" exact render={() => <App store={ this.store }/>}/>
+                    </Router>
                 </div>
             </Provider>
+
         );
     }
 
@@ -33,3 +40,4 @@ export default class ReduxProvider extends React.Component {
     }
 
 }
+
