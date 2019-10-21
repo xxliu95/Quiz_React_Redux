@@ -1,9 +1,9 @@
 import { Provider } from 'react-redux';
-import GlobalState from './reducers';
+import GlobalState from '../reducers/reducers';
 import { createStore } from 'redux';
 //import { questions } from "../asserts/mock-data";
 import React from 'react';
-import App from '../App';
+import Play from "./Play";
 
 export default class ReduxProvider extends React.Component {
     constructor(props) {
@@ -21,9 +21,7 @@ export default class ReduxProvider extends React.Component {
     render() {
         return (
             <Provider store={ this.store }>
-                <div style={{ height: '100%' }}>
-                    <App store={ this.store }/>
-                </div>
+                <Play/>
             </Provider>
         );
     }
