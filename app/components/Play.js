@@ -5,7 +5,7 @@ import Game from './Game';
 import Header from './Header';
 import Footer from './Footer';
 
-import {Text, TouchableHighlight, View} from "react-native";
+import {Text, TouchableHighlight, View, StyleSheet, ActivityIndicator} from "react-native";
 
 let url = "https://quiz.dit.upm.es/api/quizzes/random10wa?token=8606ca3284a0e9615d99";
 let noimage = "http://denrakaev.com/wp-content/uploads/2015/03/no-image-800x511.png";
@@ -30,12 +30,15 @@ class Play extends React.Component {
 
         if(this.props.questions.length === 0) {
             return (
-                <View style={{flex:1, justifyContent:'center'}}>
-                    <Header/>
+                <View style={{
+                    flex:1,
+                    justifyContent: 'center',
+                    alignItems: 'center'
+                }}>
                     <View style={{flex:1, justifyContent:'center'}}>
-                        <Text>Loading...</Text>
+                        <ActivityIndicator size="large" color="#abb1cf" />
+                        <Text style={{padding:10}}>Loading...</Text>
                     </View>
-                    <Footer/>
                 </View>
             );
         }
@@ -49,20 +52,31 @@ class Play extends React.Component {
             return (
                 <View style={{flex:1, justifyContent:'center'}}>
                     <Header/>
-                    <Text>Your Score: {this.props.score}</Text>
-                    <Text>{msg}</Text>
-                    <TouchableHighlight onPress={() => this.initReset()}>
-                        <Text>PLAY AGAIN</Text>
-                    </TouchableHighlight>
-
+                    <View style={{
+                        flex:19,
+                        flexDirection: "column",
+                        justifyContent: "center",
+                        alignItems: "center"
+                    }}>
+                        <Text style={{fontWeight: "bold", fontSize: 20}}>Your Score: {this.props.score}</Text>
+                        <Text style={{fontSize: 20}}>{msg}</Text>
+                        <TouchableHighlight style={styles.button} onPress={() => this.initReset()}>
+                            <Text style={{color: "white", fontSize: 17}}>PLAY AGAIN</Text>
+                        </TouchableHighlight>
+                    </View>
+                    <Footer/>
                 </View>
             );
         } else {
             return (
                 <View style={{flex:1, justifyContent:'center'}}>
                     <Header/>
-                    <Game num={this.props.currentQuestion}
+                    <Game current={this.props.currentQuestion}
                           question={this.props.questions[this.props.currentQuestion]}
+                          image={this.props.questions[this.props.currentQuestion].attachment === null ?
+                              noimage : this.props.questions[this.props.currentQuestion].attachment.url}
+                          author={this.props.questions[this.props.currentQuestion].author}
+                          tips={this.props.questions[this.props.currentQuestion].tips}
 
                           onQuestionAnswer={(answer) => {
                               this.props.dispatch(questionAnswer(this.props.currentQuestion, answer))
@@ -87,3 +101,13 @@ function mapStateToProps(state) {
 }
 
 export default connect(mapStateToProps)(Play);
+
+const styles = StyleSheet.create({
+    button: {
+        alignItems: 'center',
+        padding: 20,
+        margin: 10,
+        borderRadius: 5,
+        backgroundColor: "#abb1cf"
+    }
+})
