@@ -7,10 +7,6 @@ export default class Game extends React.Component {
         this.props.onQuestionAnswer(text);
     }
 
-    _showTips() {
-
-    }
-
     render() {
         return (
             <KeyboardAvoidingView

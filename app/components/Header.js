@@ -7,7 +7,6 @@ import {
     MenuTrigger,
 } from 'react-native-popup-menu';
 import {AsyncStorage} from "react-native";
-import {initQuestions} from "../reducers/actions";
 
 export default class Header extends React.Component {
     render() {
