@@ -26,8 +26,6 @@ class Play extends React.Component {
     }
 
     render() {
-        console.log(this.props);
-
         if(this.props.questions.length === 0) {
             return (
                 <View style={{
@@ -51,7 +49,6 @@ class Play extends React.Component {
                 msg = "Excelent!"
             return (
                 <View style={{flex:1, justifyContent:'center'}}>
-                    <Header/>
                     <View style={{
                         flex:19,
                         flexDirection: "column",
@@ -70,7 +67,13 @@ class Play extends React.Component {
         } else {
             return (
                 <View style={{flex:1, justifyContent:'center'}}>
-                    <Header navigation={this.props.navigation}/>
+                    <Header
+                        navigation={this.props.navigation}
+                        questions={this.props.questions}
+                        onInitQuestions={(state) => {
+                            this.props.dispatch(initQuestions(state))
+                        }}
+                    />
                     <Game current={this.props.currentQuestion}
                           question={this.props.questions[this.props.currentQuestion]}
                           image={this.props.questions[this.props.currentQuestion].attachment === null ?
