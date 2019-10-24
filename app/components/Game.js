@@ -46,10 +46,10 @@ export default class Game extends React.Component {
                     alignItems: 'center'
                 }}>
 
-                    <TouchableHighlight style={styles.button}
+                    <TouchableHighlight style={this.props.current === 0? styles.buttonDisa : styles.button}
                                         onPress={() => this.props.onChangeQuestion(-1)}
                                         disabled={this.props.current === 0}>
-                        <Text>Previous</Text>
+                        <Text style={this.props.current === 0 ? {color: "white"} : {}}>Previous</Text>
                     </TouchableHighlight>
 
                     <TouchableHighlight style={styles.buttonSubmit}
@@ -57,10 +57,10 @@ export default class Game extends React.Component {
                         <Text style={{color: "white"}}>Submit</Text>
                     </TouchableHighlight>
 
-                    <TouchableHighlight style={styles.button}
+                    <TouchableHighlight style={this.props.current === 9? styles.buttonDisa : styles.button}
                                         onPress={() => this.props.onChangeQuestion(1)}
                                         disabled={this.props.current === 9}>
-                        <Text>Next</Text>
+                        <Text style={this.props.current === 9 ? {color: "white"} : {}}>Next</Text>
                     </TouchableHighlight>
 
                 </View>
@@ -144,5 +144,13 @@ const styles = StyleSheet.create({
         margin: 10,
         borderRadius: 5,
         backgroundColor: "#EEEEEE"
+    },
+    buttonDisa: {
+        flex: 1,
+        alignItems: 'center',
+        padding: 5,
+        margin: 10,
+        borderRadius: 5,
+        backgroundColor: "#FEFEFE"
     }
 })

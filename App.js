@@ -3,6 +3,7 @@ import ReduxProvider from './app/components/ReduxProvider';
 import {View, Text, TouchableHighlight, Image, StyleSheet} from "react-native";
 import {createAppContainer} from "react-navigation";
 import {createStackNavigator} from "react-navigation-stack";
+import {MenuProvider} from "react-native-popup-menu";
 
 class HomeScreen extends React.Component {
     render() {
@@ -40,7 +41,9 @@ class PlayScreen extends React.Component {
                 justifyContent: 'space-between',
                 alignItems: 'stretch',
                 paddingTop: Expo.Constants.statusBarHeight}}>
-                <ReduxProvider/>
+                <MenuProvider>
+                    <ReduxProvider navigation={this.props.navigation}/>
+                </MenuProvider>
             </View>
         );
     }

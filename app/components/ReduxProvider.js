@@ -21,7 +21,7 @@ export default class ReduxProvider extends React.Component {
     render() {
         return (
             <Provider store={ this.store }>
-                <Play/>
+                <Play navigation={this.props.navigation}/>
             </Provider>
         );
     }

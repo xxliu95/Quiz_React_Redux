@@ -70,7 +70,7 @@ class Play extends React.Component {
         } else {
             return (
                 <View style={{flex:1, justifyContent:'center'}}>
-                    <Header/>
+                    <Header navigation={this.props.navigation}/>
                     <Game current={this.props.currentQuestion}
                           question={this.props.questions[this.props.currentQuestion]}
                           image={this.props.questions[this.props.currentQuestion].attachment === null ?
